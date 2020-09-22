@@ -3,41 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+    body{
+        background-color:#000;
+    }
+    </style>
     <title>Document</title>
 </head>
 <body>
-<a href="/render/MakePosts">POST A PAGE</a>
-    <% posts.forEach(posts => {%>
-    <div style="border:1px solid black; padding: 20px;" >
-    <div> <%= posts.title %></div>
-    <div> <%= posts.tag %></div>
 
-    <a href="/render/posts/<%=posts.id%>">edit...</a>
-    </form>
-    
-    <style>
-    .btns{
-        display: none;
-    }
-    </style>
-    <button id = 'btn'script>delete</button>
-    <div class="btns">
+<div class='container black darken-5' style='display: flex; justify-content: center; height: 100px;  align-items: center;'>
+<a href="/render/MakePosts">
+<button class="btn blue lighten-2" style='color:#000; font-size:30px;'> POST A PAGE </button></a>
+</div>
+
+    <div class="card" style="justify-content: center; display: flex; flex-wrap: wrap;">
+    <% posts.forEach(posts => {%>
+    <!-- 각 카드 -->
+    <div class="card" style="border: 1px solid black; width:200px; height:200px; text-align: center; margin:20px; display: flex;
+        justify-content: center; align-items: center; flex-direction: column;
+    " >
+    <div> <%= posts.title %></div>
+    <div> <%= posts.date.toLocaleDateString() %></div>
+    <!-- 패치 버튼 -->
+    <a href="/render/posts/<%=posts.id%>">
+    <button class="btn" style="position: absolute; right:20px ;bottom: 5px;">PATCH</button>
+    </a>
+    <!-- 삭제 버튼 -->
+    <button class ='btn red lighten-2' style="position: absolute; right: 100px; bottom: 5px;" id = 'real-del-btn'>delete</button>
+
+    <div id='btn_layer' style=" opacity:0.5; transition: 1; left:0; top:0; width: 100vw; height: 100vh; position: fixed; background-color: #000;"></div>
+    <!-- 삭제 버튼 팝업 -->
+    <div class="container" id="btns" style="z-index: -1; display: none; height: 100px;">
+    <div style="position: fixed; top: 40%; left :45%; color:#FFF;">
+    <%= posts.title%>
+    </div>
     <form action="posts/<%= posts.id %>?_method=DELETE" method="POST">
-    <button id="delete-btn" onclick=confirmDelete>delete</button>
+    <button class="btn red lighten-2" id="delete-btn">delete</button>
     </form>
-    <button id='cancel-btn'>cancel</button>
+    <button class="btn" id='cancel-btn'>cancel</button>
     </div>
     </div>
     <% })%>
+    <style>
+    #btns{
+        display: none;
+    }
+    #btn_layer{
+        display: none;
+    }
+    </style>
 </body>
+    <!-- 버튼 js  -->
     <script>
-    const A = document.getElementById('btn');
-    const B = document.getElementById('cancel-btn');
-    A.addEventListener('click',()=>{
-        document.querySelector('.btns').style.display = 'flex';
-    })
-    B.addEventListener('click',()=>{
-        document.querySelector('.btns').style.display = 'none';
-    })
+    let A = document.querySelectorAll('#real-del-btn');
+    const B = document.querySelectorAll('#delete-btn');
+    const C = document.querySelectorAll('#cancel-btn');
+    const D = document.querySelectorAll('#btns');
+    
+    for(let i=0 ; i < A.length ; i++){
+        A[i].addEventListener('click', ()=>{
+            document.querySelector('#btn_layer').style.display = 'flex';
+            D[i].style.left = '45%';
+            D[i].style.top = '45%';
+            D[i].style.display = 'flex';
+            D[i].style.position = 'fixed';
+            D[i].style.zIndex = 9999;
+
+        });
+        B[i].addEventListener('click',()=>{
+            D[i].style.display = 'none';
+            document.querySelector('#btn_layer').style.display = 'none';
+        })
+        C[i].addEventListener('click',()=>{
+            D[i].style.display = 'none';
+            document.querySelector('#btn_layer').style.display = 'none';
+        })
+    }
+
+    // function relDel(){
+    //     console.log(1);
+    //     let btnsArr = document.querySelectorAll('#btns');
+    //     console.log([btnsArr])
+    //     // btnsArr.map((e)=>{
+    //     // })
+        
+    // }
     </script>
 </html>

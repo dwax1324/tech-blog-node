@@ -1,21 +1,32 @@
+<div style="display: flex; justify-content: center; width: 100vw; overflow: hidden; height: 100vh; background-color: #000;">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<div style="color: #fff; width: 75vw; height: 100vh; display: flex; justify-content: center; flex-direction: column; background-color: #000;">
+    <label for='title' style="color:#FFF;font-size: 20px;">Title</label>
 <div>
-    <label for='title'>Title</label>
     <input required value="<%= posts.title%>"
-    type='text' name='title' id='title'/>
+    type='text' name='title' id='title'style="border:1px solid white; text-align:center; color:white"/>
 </div>
 
 <div>
 <script src="https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
-
-    <textarea id="editor" name='description' id='description'>
+    <div>
+    <textarea id="editor" name='description' id='description'">
     <%= posts.description%>
     </textarea>
+    </div>
 <script>
     CKEDITOR.replace( 'editor' );
 </script> 
 
 </div>
-<div>
-    <button type='submit'>SAVE</button>
-    <a href='/render/posts'>Cancel</button>
+    <button class='btn' type='submit' style="height:50px">SAVE</button>
+    <button class='btn red lighten-2' type='submit' style="height:50px"><a href='/render/posts'>Cancel</a></button>
+    </div>
+
 </div>
+<style type="text/css">
+a:link {text-decoration: none; color: #FFF;}
+a:visited {text-decoration: none; color: #FFF;}
+a:active {text-decoration: none; color: #FFF;}
+a:hover {text-decoration: underline; color: #FFF;}
+</style>
