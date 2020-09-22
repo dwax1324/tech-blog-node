@@ -19,10 +19,10 @@ const port = process.env.PORT;
 const mongoDB = process.env.MONGO_DB; 
 
 var http = require("http");
-// setInterval(function () {
-//     console.log("every 10 minutes (600000)");
-//     http.get("http://[your-heroku domain].herokuapp.com");
-// }, 600000); // every 10 minutes (600000)
+setInterval(function () {
+    console.log("every minutes (60000)");
+    http.get("http://dwax1324.herokuapp.com/posts");
+}, 60000); 
 
 
 // 홈- 기본라우트
