@@ -1,0 +1,21 @@
+<div>
+    <label for='title'>Title</label>
+    <input required value="<%= posts.title%>"
+    type='text' name='title' id='title'/>
+</div>
+
+<div>
+<script src="https://cdn.ckeditor.com/4.15.0/full/ckeditor.js"></script>
+
+    <textarea id="editor" name='description' id='description'>
+    <%= posts.description%>
+    </textarea>
+<script>
+    CKEDITOR.replace( 'editor' );
+</script> 
+
+</div>
+<div>
+    <button type='submit'>SAVE</button>
+    <a href='/render/posts'>Cancel</button>
+</div>
