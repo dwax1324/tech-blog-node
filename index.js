@@ -5,6 +5,7 @@ const app = express();
 const Post = require('./models/Post')
 const methodOverride = require('method-override');
 const cors = require('cors');
+
 require('dotenv').config();
 
 app.set('view engine', 'ejs');
@@ -18,11 +19,7 @@ app.use('/render/makePosts', require('./routes/render/makePosts'))
 const port = process.env.PORT;
 const mongoDB = process.env.MONGO_DB; 
 
-var http = require("http");
-setInterval(function () {
-    console.log("every minutes (60000)");
-    http.get("http://dwax1324.herokuapp.com/posts");
-}, 60000); 
+var https = require("https");
 
 
 // 홈- 기본라우트
@@ -39,6 +36,10 @@ app.get('/render/posts', async (req, res) => {
     }
 
 })
+setInterval(()=> {
+    console.log("every minutes (60000)");
+    https.get(process.env.HEROKU_URL);
+}, 60000); 
 
 // DB 연결
 mongoose.connect(
