@@ -65,11 +65,12 @@
     for(let i=0 ; i < A.length ; i++){
         A[i].addEventListener('click', ()=>{
             document.querySelector('#btn_layer').style.display = 'flex';
+            document.querySelector('#btn_layer').style.zIndex = 5;
             D[i].style.left = '45%';
             D[i].style.top = '45%';
             D[i].style.display = 'flex';
             D[i].style.position = 'fixed';
-            D[i].style.zIndex = 9999;
+            D[i].style.zIndex = 10;
 
         });
         B[i].addEventListener('click',()=>{

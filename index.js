@@ -36,6 +36,8 @@ app.get('/render/posts', async (req, res) => {
     }
 
 })
+
+// 헤로쿠 잠깨우기
 setInterval(()=> {
     console.log("every minutes (60000)");
     https.get(process.env.HEROKU_URL);
